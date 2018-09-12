@@ -6,10 +6,14 @@ class GameSerializer < ActiveModel::Serializer
   end
 
   def scores
-    plays = []
+    player_1_score = 0
+    player_2_score = 0
+    player_scores = Hash.new(0)
     object.plays.each do |play|
-      plays << {user_id: play.user_id, score: play.score}
+      player_scores[play.user_id] = player_scores[play.user_id] + play.score
     end
-    plays
+    player_scores.map do |user_id, total_score|
+      {'user_id': user_id, 'score': total_score}
+    end
   end
 end
