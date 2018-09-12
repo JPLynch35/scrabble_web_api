@@ -1,7 +1,7 @@
-<%= form_tag root_path, method: :get do %>
+<%= form_tag '/words', method: :post do %>
     <%=label_tag 'word' %>
     <%=text_field_tag 'word'%>
 
     <%= submit_tag 'Validate Word' %>
 <% end %>
-<p><%= @presenter.word_check %></p>
+
