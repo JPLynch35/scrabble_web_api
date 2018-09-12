@@ -4,6 +4,7 @@ class Play < ApplicationRecord
 
   before_save :score_word
 
+
   def letter_scores
     {
       "A"=>1, "B"=>3, "C"=>3, "D"=>2, "E"=>1, "F"=>4, "G"=>2, "H"=>4, "I"=>1, "J"=>8,
@@ -11,9 +12,12 @@ class Play < ApplicationRecord
       "U"=>1, "V"=>4, "W"=>4, "X"=>8, "Y"=>4, "Z"=>10
     }
   end
-
+  
   private
-
-    def score_word
+  def score_word
+    word_array = self.word.upcase.chars
+    self.score = word_array.inject(0) do |sum, letter|
+      sum += letter_scores[letter]
     end
+  end
 end
